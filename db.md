@@ -20,3 +20,21 @@
     - 공통된 주용한 기능을 지원
     - DBMS가 알아서 잘 해줌
 
+# DBMS 데이터 명세 및 저장
+* 데이터 모델
+    - 관계 데이터 모델
+    - 의미적인 데이터 모델(semantic data model)
+        + 추상적, 고수준 데이터 모델, 
+        + 초기 명세 쉬움
+* *관계모델 (Entity-relationship : ER)*
+    - 릴레이션 (relation) 
+    - 스키마 (schema)
+        + 다음과 같은 스키마를 가진 릴레이션
+            - Students(*sid*: string, *name*:string, *login*:string, *age*: integer, *gpa*:real)
+    - 무결성 제약조건 (integrity constraint)
+        + 한 릴레이션에 있는 레코드들이 반드시 만족해야하는 조건들
+            - 각 학생의 *sid* 
+            - 키값 정도 보면 될듯
+* DBMS 추상화 
+    ![levels_of_abstraction](./db_img/levels_of_abstraction)
+    - 
