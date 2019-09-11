@@ -36,5 +36,4 @@
             - 각 학생의 *sid* 
             - 키값 정도 보면 될듯
 * DBMS 추상화 
-    - ![levels_of_abstraction](./db_img/levels_of_abstraction.png){: width="200" height="200"}
     - <img width="200" height="200" src="./db_img/levels_of_abstraction.png"></img>
