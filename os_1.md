@@ -111,7 +111,48 @@
         - 자동차 브레이크 
     + Soft real-time system
         - 통화 음성
-## OS CONCEPT
+<!-- ## OS CONCEPT
 - Processes
     - program which running
     - has its own **address space**
+    - a process includes the execution **context**
+    - OS 의 process table 에 저장
+    - process 간 교류는 무조건 OS 통해서만
+- Memory management
+    - programs must be stored in mem to execute
+    - OS -> allocate mem space for programs
+    - Virtual mem systems (through **page talbe**)
+    - mem size allocate (a policy decision by OS)
+- File Systems
+    - file : long-term storage unit
+    - File system operations
+        - provide higher level services
+    
+- I/O 
+    - through OS kernel
+    - OS provides a standard interface btw **programs** & devices
+    - 
+
+
+    for final semester --> 
+
+- Protected Instructions **important**
+    - instructions, restricted to the OS
+        - protected of privileged instructions
+    - instructions runs only on **kernel mode!!**
+    - **PSW** can change the mode btw kernel & user
+        + Program Status Word Register
+- OS Protection
+    - How does the processor know if a protected instruction should be executed?
+        - by mode register (PSW), kernel mode & user mode
+        - only execute in kernel mode
+- Crossing Protection Boundaries
+    - user programs have to write
+        + need OS, **system call**
+    - system call
+        - when in user mode, need admin authorize
+        - kicks in **Trap 명령어**(need parameter) -> software Intterupt
+        - smillar to I/O Interrupt
+        - change to kernel mode
+- Kernel Crossing
+    -
