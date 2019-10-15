@@ -1,8 +1,3 @@
-<script type="text/javascript" async
-src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js? 
-config=TeX-MML-AM_CHTML"
-</script>
-
 ## Information Retriever
 
 * 회수율 & 정확도
@@ -142,5 +137,17 @@ config=TeX-MML-AM_CHTML"
     - \sum q_i d_i
     - $\sum_ q_i d_i$
         - q_i -> query, di -> doc term wieths for term i
-- optimization
-    - 
+- Optimization
+    - term-at-a-time vs doc-at-a-time  processing
+    - safe vs unsafe   optimization
+- Distribution
+    - distributed env
+    - *Quert broker* distributes queries and assembles results
+    - *Caching* form of distributed searching
+* Evaluation
+- Logging
+    - user queries & interaction  for effectiveness and effeciency
+- Ranking analysis
+    - Measuring and tuning *ranking* **effectiveness**
+- Performance analysis
+    - Measuring and tuning *system* **efficiency**
