@@ -135,6 +135,7 @@
 * Ranking
 - Scoring
     - \sum q_i d_i
+    - $\sum_ q_i d_i$
         - q_i -> query, di -> doc term wieths for term i
 - optimization
     - 
