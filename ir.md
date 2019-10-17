@@ -1,4 +1,4 @@
-## Information Retriever
+# Information Retriever
 
 * 회수율 & 정확도
     - effectiveness
