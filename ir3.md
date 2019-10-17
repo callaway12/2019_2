@@ -1,6 +1,6 @@
 # Information Retriever
 * Web Crawler
-- <img width="200" height="200" src="./ir_img/ir_link.png"></img>
+- <img width="400" height="200" src="./ir_img/ir_link.png"></img>
 - Crwal sequence
     - DNS -> hostname -> IP address -> port -> HTTP request, GET request
     - seeds, URLs
@@ -80,7 +80,7 @@
 - 4 byte -> chinese
 - UTF-32 -> internal text (fast random lookup)
 - UTF-8 -> disk sotrage (less space)
-- <img width="200" height="200" src="./ir_img/ir_unicode.png"></img>
+- <img width="300" height="200" src="./ir_img/ir_unicode.png"></img>
     - 앞에부터 늘면 1이 더 붙음
 * Storing the Docs
 - Advantage
@@ -97,12 +97,12 @@
 - row-level transactions
 - 분산 시스템
 - record transaction log, shared file system, for server down
-- <img width="200" height="200" src="./ir_img/ir_row_table.png"></img>
+- <img width="400" height="200" src="./ir_img/ir_row_table.png"></img>
 - inverted hash table(from os) 비슷
 * Duplicate Detection
 - Checksum technique
     - 각 글자들의 value 값을 다 더함
-    - <img width="200" height="200" src="./ir_img/ir_checksum.png"></img>
+    - <img width="400" height="200" src="./ir_img/ir_checksum.png"></img>
 - Near-Duplicate Detection
     - doc D1, doc D2 비교, by Near-Duplicate
     - Search : O(N) -> IR 
@@ -113,7 +113,7 @@
 3. some *n-grams* represent docs
 4. selected *n-grams* hashing -> improve IR efficiency
 5. docs compare by fingerprints
-- <img width="200" height="200" src="./ir_img/ir_fingerprint_sample.png"></img>
+- <img width="300" height="300" src="./ir_img/ir_fingerprint_sample.png"></img>
 * Simhash
 - word-based sim & fingerprints efficiency
 1. weighting by frequency
@@ -129,5 +129,5 @@
 - 중요 content에는 tag가 적다 는 아이디어에 착안
 - <img width="200" height="200" src="./ir_img/ir_content_block.png"></img>
     - plateau
-- <img width="200" height="200" src="./ir_img/ir_find_content_block.png"></img>
+- <img width="300" height="300" src="./ir_img/ir_find_content_block.png"></img>
     - **이해 안됨,,,,,**
