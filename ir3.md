@@ -122,7 +122,7 @@
     - **to make faster, multiply first char and the last char**
 3. 1이면 더하고 0이면 빼는데 각 word의 자리에 맞춰서 weight랑 곱해서 처리
 4. 8bit 중에서 positive 면 1 negative 면 0 으로 V vector 설정
-- <img width="200" height="200" src="./ir_img/ir_simhash_sample.png"></img>
+- <img width="400" height="400" src="./ir_img/ir_simhash_sample.png"></img>
 * Removing Noise
 - adds, links, pics, 
 - detect content block
