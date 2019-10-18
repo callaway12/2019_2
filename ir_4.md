@@ -34,10 +34,10 @@
                 
                 - Estimating with initial result set
                     - C/s ( s == total ranked doc size, C == docs contain all the query word)
-                    - <img width="300" height="300" src="./ir_img/ir_gov2_1.png"></img>
+                    - <img width="300" height="250" src="./ir_img/ir_gov2_1.png"></img>
 
                     - independence model
-                    - <img width="300" height="300" src="./ir_img/ir_gov2_independent.png"></img>
+                    - <img width="300" height="250" src="./ir_img/ir_gov2_independent.png"></img>
 
                     - **DONT KNOW SHIT!!**
 
@@ -148,7 +148,7 @@
         - Rule-based
             - Uses lexicons(lists of words and phrases)
                 - location, people's name, organization
-            - <street address>, <city>, or in <city> to verify city
+            - < street address >, < city >, or in < city > to verify city
             - able to find new words of city etc,
         - Rules
             - By manual By machine learning
@@ -161,7 +161,7 @@
             - "marathon" for sport of location
         - Model context using *generative* model of sequence of words
             - Markov property: next word in a sequence depends on a previous words
-        - <img width="550" height="50" src="./ir_img/ir_hmm.png"></img>
+        - <img width="300" height="300" src="./ir_img/ir_hmm.png"></img>
         - To recognize named entities -> find sequence of "labels" that give *highest* probability for sentence
             - only outputs are visible
             - states are "hidden"
