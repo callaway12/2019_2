@@ -189,4 +189,38 @@
     - order inverted lists by quality metric or by partial score
     - make unsafe optimization -> produce good doc
 * Structured Queries
-    - 
+    - similar to SQL
+    - Galago query
+        - #combine(#od:1(tropical fish) #od:1(aquarium fish) fish)
+* Evaluation Tree for Structured Query
+    - <img width="400" height="300" src="./ir_img/ir_od_estimate.png"></img>
+* Distributed Evalutation
+    - Basic process
+        - All queries eent to a *director machine*
+        - Director sends message to *index servers*
+        - Index server has own portion of query
+        - Director organizes the results
+        - return to User
+    - Two main approaches
+        - Doc distribution
+        - Term distribution
+    - Document distribution
+        - index server has own small fraction of the total collection
+        - director sends a copy of query to each of the index servers,
+        returns the top-k results
+        - results are merged into a single ranked list by the director
+    - Collection statistics should be shared for effctive ranking
+    - Term distribution
+         - Single index is built for the whole cluster of machines
+         - Each inverted list for each index server
+         - One of index servers is chosen to process
+            - holding the longest inverted list
+        - Other index servers send information to that one server
+        - Final results sent to director
+* Caching
+    - query distribution -> refers to Zipf
+    - Cache popular query results
+    - Cache common inverted lists
+        - help with unique queries
+    - Must be rereshed to prevent stale data
+    
