@@ -61,7 +61,7 @@
         - each core has separate L2 cache
 - I/O Devices
     + Interrupt
-        + <img width="200" height="200" src="./db_img/io_devices_sequence.png"></img>
+        + <img width="200" height="200" src="./os_img/io_devices_sequence.png"></img>
         + cpu 에서 디스크 data access 요청
         + kernel mode로 전환
         + 해당 요청을 각각의 Device Driver 에서 해당 Device로 요청
@@ -155,4 +155,4 @@
         - smillar to I/O Interrupt
         - change to kernel mode
 - Kernel Crossing
-    -
+    - 
