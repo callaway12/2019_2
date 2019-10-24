@@ -163,3 +163,7 @@
     - Threads allow utilization of multiprocessor architectures to a greater scale and efficiency
     - User Level Threads − User managed threads.
     - Kernel Level Threads − Operating System managed threads acting on kernel, an operating system core.
+* Monolithic Systems
+    - 장점 : 함수콜로 이루어져 cost 가 낮다. 성능이 좋다
+    - 단점 : 이해 x, 변경 어렵다, 유지 어렵다, 신뢰성 x, 한쪽 error? 전체 error
+* 
