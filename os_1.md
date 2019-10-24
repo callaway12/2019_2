@@ -156,3 +156,10 @@
         - change to kernel mode
 - Kernel Crossing
     - 
+* Multi Threading
+    - less context switching
+    - Efficient communication.
+    - Use of threads provides concurrency within a process
+    - Threads allow utilization of multiprocessor architectures to a greater scale and efficiency
+    - User Level Threads − User managed threads.
+    - Kernel Level Threads − Operating System managed threads acting on kernel, an operating system core.

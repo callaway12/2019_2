@@ -121,7 +121,7 @@
         - disk img == mem img ( consistent )d
     - <img width="350" height="300" src="./os_img/os_vp.jpeg.png"></img>
     - **PTE**
-        - <img width="350" height="300" src="./os_img/os_pte.jpeg.png"></img>
+        - <img width="350" height="300" src="./os_img/os_pte.jpeg"></img>
         - **Modified bit**
             - 해당 페이지가 modified 되면 disk에 써줘야하는걸 알려주는거
             - dirty bit, 하는 이유가 디스크랑 항상 consist 해야하는데 그래서 consist 해야하는걸 어디가 바뀌었는지 알려주는 bit
@@ -174,5 +174,39 @@
         - **Modified bit is copied back into the PTE when purged**
     - MMU with TLB
         - mem 에 있는 Table 대신에 MMU의 TLB에 먼저 접근
+            - In the case, every machine with paged virtual mem has page tables recognized by the h/w & TLB, TLB mange & faults are handled by MMU h/w
+                TRAPs to the os occur only when a page is not in mem
+            -  RISC, and modern system, all these things done by software
         - *What happen when TLB hits of occur?*
-            - 
+            - When miss happens?
+                - TLB generate fault & tosses the problem into the lap of the os.
+                - System fine the page, remove an entry from the TLB, enter the new one, and restart the instruction fault
+                - TLB miss 가 page faults 보다 빈번
+            1. TLB 미스 나면 page table 가서 찾는건데
+                - TLB cache 크기 키우면 miss rate 낮출 수 있음
+            2. TLB by software
+                - soft miss
+                    - page referenced ㄴㄴ, but in mem?
+                        - fast update 2ns
+                - hard miss
+                    - page itself is not in mem
+                    - disk I/O, 2ms
+                - page table walk?
+                    - 
+        - TLB Flush?
+            - each process typically has its own page tables
+            - **when process context switch!!**
+* Two-Level page table
+    - <img width="350" height="300" src="./os_img/os_two_level.png"></img>
+    - 우선 페이지 크기? 4KB -> 2의 몇승인지? 12승이면 offset의 사이즈가 12비트
+    - 4 bytes/PTE -> PTE면 페이지 테이블 엔트리, 즉 페이지 테이블의 한칸 한칸, 따라서 4KB / 4 bytes -> 1024개의 PTE 존재
+    - 1024개의 PTE면 무엇이냐? second level page table 갯수가 그만큼 있다는거지
+    - 위에 PTE 갯수 구한게 1024개니깐 즉, 일자로된 비트 로 나타날때 first level bit의 갯수가 2^10 즉, 10개짜리다,
+    - 그래서 총 32개의 비트 체계라면 first level bit = 10, offset =12 개니깐 자동으로 32 - 10 - 12 니깐 10bit 가 second level bit 가 된다
+
+* Inverted Page Table
+    - 만약 page table로 64bit 주소 체계면??
+        - 수십억 페이지 테이블이 나와야하는데 망함
+        - solution for larger page table
+    - One entry per page frame in real memory
+    
