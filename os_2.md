@@ -132,7 +132,7 @@
             - 물리적인 메모리, 디스크, 프린터, 기타 자원 공유
     - unit of scheduling (or context switch unit)
         - processes are just containers
-    -  <img width="550" height="400" src="./os_img/os_threads_eximg.png"></img>
+    -  <img width="550" height="400" src="./os_img/os_threads_ex.png"></img>
     - Thread 별로 stack 이 쌓임
         - **각 스레드들이 각자 자신의 스택을 가져야하는 이유???**
         - ex) 하나가 실행하다가 다른 스레드를 불러야할때 실행 완성되기 전이라 마무리 하기 전까진 모두 스택에 붙어있어야하니깐 
@@ -464,4 +464,52 @@
         - Dynamic
             - Give good service to I/O-bound processes
             - Decrease running procesess's priority each clock
-            
+    - Problem
+        - starvation
+            - what if? endless of high-priority?
+            - Solution -> aging!!!
+            - Increase waiting process's priority each clock
+            - Decrease running procesess's priority each clock
+    - EX
+        - Priority Class
+        - round-robin -> each classes
+* Multi Queues
+    - Algorithm
+        - multiple queues
+        - different algorithms for each queue
+        - maybe, move processes between queues
+    - Example: Multi-level feedback queues (MLFQ)
+        - multi queue -> different job type
+            - lower priority has longer quantum
+        - queues have priorities
+            - 상단의 Priority queue 와 동일
+        - jobs move between queues based on execution history
+            - "Feedback" : switch from CPU-bound to IO-bound
+                - CPU-bound job이 lower priority로 내려가면 quantum 을 다 쓴다
+                - Interactive job moves to a upper priority queue
+    - POP-QUIZ:
+        - is MLFQ starvation-free?
+            - 아닐거 같은데 quantum이 있으니깐
+* Guaranteed Scheduling
+    - 해당 process에 ideal 하게 할당하는 CPU time 과 실제 process가 사용한 CPU time의 비율을 따져서 작을수록 priority가 높아짐
+* Lottery Scheduling
+    - 총 사용 가능한 CPU time 을 할당,
+    - 그것을 지킴으로써 최소한의 실행 시간을 무조건 보장
+    - Performance assuring
+* Fair-share scheduling
+    - share resource based on owner, not process
+* Scheduling in Real-Time System
+    - Process behavior is predictable and known in advance
+    - Real-time Events
+        - Periodic : occurring at regular intervals
+        - Aperiodic : occurring unpredictably
+    - Goal
+        - **schedulable?**
+            - given 
+                - *m* periodic events
+                - event *i* occurs with period Pi and requires Ci seconds to handle
+                - **sum(Ci / Pi) =< 1 -> schedulable!!**
+            - EX
+                - periods 100, 200, 500 for each periodic events
+                - requires 50, 30, 100 of CPU time per events
+                - 50 /100, 30/200, 100/500 -> 0.5 + 0.15 + 0.2 < 1 이니깐 만족!!!
