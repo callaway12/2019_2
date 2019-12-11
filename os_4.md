@@ -291,4 +291,18 @@
                 - link couter > usage counter -> link counter = usage counter
                 - link couter < usage counter -> link counter = usage counter
                 - 무적권 usage counter 가 정답
-        
+* File System Performance
+    - Cache
+        - 디스크 접근시간 줄임
+        - cache & paging 의 차이점은 덜 빈번하게 참조
+        - 모든 블록들을 완벽히 LUR로 유지 가능
+        - i-node & 메타 데이터는 지워지면 치명적이다, 메모리에 바로 접근
+    - Wirte-Through cache
+        - modified 가 되면 바로바로 disk에 써주는거
+    - Write-behind (wirte-back)
+        - modified blocks를 queue에 넣어서 저장
+        - 저장했다가 disk에 쭉 저장하고 flush
+        - 단정 : unreliable
+    - log structured filed system
+        - disk에 바로 옆에다가 저장, 즉 disk track 을 따라서 저장
+    - <img width="500" height="500" src="./os_img/os_disk_arm_reduce.png"></img>
