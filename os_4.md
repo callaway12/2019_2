@@ -170,5 +170,125 @@
     - Caching
         - caches the results of searches
         - Small number of files 일때 굳
-* Shared Files
-    - 
+* Shared Files **check again!!!!!!!!!!!!**
+    - Directories sharing same file, cannot both have disk addresses
+        - change of disk addr, will not be reflected on other
+        - wtf?
+    - Solution
+        - Using i-node, pointing same i-node
+        - Symbolic link
+            - Create new file of type LINK
+            - Enter the path name in this file
+                - File /b/b/b1 has path name c/c/c1
+                    - Link count ++ ㄴㄴ 
+                    - 왜냐면 i-node 의 해당에 안되니 LC 카운트 ㄴ
+    - Problem
+        - i-node
+            - 만약 2개의 Dir이 하나의 파일을 공유시 다른 하나가 파일을 지웠을 경우 다른 Dir에서는 그대로 남아 있다, 고로 LC 값이 하나가 감소는 됐지만 파일이 살아 있음
+            - Solution
+                - 한 경로를 지우면 같이 지워지니깐,
+                - 일단 만약 어느 한 DIR에서 지웠으면 그 directory entry에서 해당 지운 파일을 없앤 후에 lc 값만 1로 바꿔줌 **근데 시발 뭔말이야**
+        - symbolick link (바로가기)
+            - Performance overhaad for following path in LINK file
+                - Have to access the link file first; more disk accesses
+            - 경로 이름에 네트워크 주소 추가 (이게 뭔말이야 시발)
+    - Hard link
+        - Directory entry points to data structure associated with the file
+        - Not change ownership, but increases the link count
+        - Hard to fine all the directory entries for file to be deleted
+    - Symbolic Link
+        - Directory entry for a new file of type LINK contains the path name of the file to be linked
+        - Extra disk access to reach a file
+        - Extra i-node (and disk block to store path)
+        - Can be used to link file on different machines
+    
+* Log-Structured File System
+    - 우선 I-node 따라가서 해당하는 정보들을 읽어 들일떄 여러 번호에 따라서 DISK 에서 이리저리 왔다갔다 하면 overhead ㅆㅅㅌㅊ
+    - 그래서 mem 에 caching 하면 속도 굳, (locality)
+    - but what if - mem 이랑 disk 랑 달라지면? (mem에 caching 해놓은게 새로 쓰여지고 disk는 그대로일때)
+    - system crash
+    - 그래서 이 간극을 좁히는게 log (buffer에 저장)
+    - log를 disk에 sequence 하게 저장, (write 속도 굳 )
+        - i-node, directory blocks, data block, segment summary
+    - i-node map 필요 (to find scattered all over the log)
+* Journaling File Systems
+    - 전체 disk check ㄴㄴ
+    - log( 명령수행과정) 체크
+    - down -> log 그대로
+    - 다시 부팅 되면 -> log 다시 수행
+    - log 완수되면 -> log 지움 (이 모든 과정을 disk 에 저장)
+
+    - Improve file system robustness in the face of failure
+    - Keep log of what the file system is going to do before it does
+        - main file system에 commit 하기 전에 journal 하는것
+        - 작업이 끝나고! 나면 log entry를 지운다
+        - idempotent 해야하는것, 즉 아무리 새로 고쳐도 원상태 고대로
+            - Can be repeated as often as necessary without harm
+            - EX) Update the bitmap to mark block N as free?????
+    - Removing a File
+        1. Remove the file from its directory
+        2. Release the i-node to the pool of free i-nodes
+        3. Return all the disk blocks to the pool of free disk blocks
+
+        - 만약 반대로 올라가면 데이터가 그대로 남아 있음
+        - 순서대로 진행되면서 각 단계별로 crash 났을때의 상황
+        - 만약 i-node 는 풀렸는데 file은 그대로 있으면 다른 이상한 애가 씀
+        - 만약 block이 풀리고 나머진 그대로면 valid directory entry가 i-node listing blocks now in the free pool and which ar likely to be reused shortly, leadking to two or more files randomly sharing the same blocks
+        - **이거 꼭 다시 봐야함**
+* Virtual File System
+    - 여러가지 파일 시스템을 짬뽕해서 쓸수있게한거
+    - virtual file system 밑에다가 여러 FS들을 깔아놓고 쓰는거
+    - Structure
+        - POSIX interface (open read write Iseek etc)
+        - VFS
+        - FS1 Fs2 FS3 etc
+        - Buffer cache
+* Keeping Track of Free Blocks
+    - <img width="550" height="250" src="./os_img/os_tracking_blocks.png"></img>
+    - 하나는 multi-level page 처럼 하고 하나는 bipmap
+    - Linked list
+        - only one block in mem
+        - 500GB -> 1k -> 1.9MB blocks
+        - Free blocks are used, so the storage is essentially free
+    - Bitmap
+        - 500GB 60,000 개의 1kb blocks 
+        - 앞에서부터 순차적으로 찾아야함
+        - 위에꺼보다 적게 씀 부피는
+* Backup
+    - Physical dumps
+        - block 0부터 몽땅 뒤집어 쓰는거
+        - Simple and Fast
+        - bad block 이랑 unused block 이랑 몽땅 다 하기 떄문에 별로임
+    - Logical dumps
+        - 원하는거 골라서 back up
+        - recusively
+        - 만약 경로에 unmodified 있으면 그것도 같이 ㄱ
+
+        - Sequence
+            1. 우선 modified 된 file이랑 directory를 몽땅 mark (일단 모든 directory는 무적권)
+            2. directory 중에서 unmodified 된 것들은 unmark
+            3. 그러도 일단 modified 된 directory 먼저 dump 
+                - 그러고 dump 한 directory unmark
+            4. 그다음에 남은것들은 modified된 file들을 dump
+* File System Consistency
+    - Blocks and files consistency checks
+    - fsck in Unix
+    - scandisk in Windows
+
+    - <img width="600" height="210" src="./os_img/os_blcok_consistency.png"></img>
+    - a 를 보면 이게 기본 세팅, 항상 in use 와 free 는 보위관계
+    - b 를 보면 둘다 0인 부분이 있음, 이거 보면 아무도 사용 안하는데 free block list에는 없는것임
+        - 간단하게 free list 에 추가
+    - c 를 보면 아무도 사용하지 않는데 free list 에는 해당 block을 두번 추가해놓음,
+        - 간단하게 free list 에서 1로 만들어줌
+    - d 가 가장 심각!! block 하나를 두놈이 쓰고 있음
+        - 하나를 복사해서 다른 free block 으로 옮겨줌 
+    
+    - How to check consistency?
+        - Use a counter per file
+            - counter++ -> file tree 에서 찾아지면
+            - Compare usage counter with link counter of the file
+                - link couter > usage counter -> link counter = usage counter
+                - link couter < usage counter -> link counter = usage counter
+                - 무적권 usage counter 가 정답
+        
